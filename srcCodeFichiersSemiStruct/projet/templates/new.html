@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h3>Nouveau étudiant</h3>
+
+  <form action="/new?token={{ token }}" method="POST">
+    Nom:<br>
+    <input type="text" name="nom"><br><br>
+
+    Adresse:<br>
+    <textarea name="addr"></textarea><br><br>
+
+    PIN:<br>
+    <input type="text" name="pin"><br><br>
+
+    <input type="submit" value="Ajouter">
+  </form>
+
+  <br>
+  <a href="/list?token={{ token }}">Retour à la liste</a>
+</body>
+</html>

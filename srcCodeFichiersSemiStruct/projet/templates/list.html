@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h3>Liste des étudiants</h3>
+
+  <table border="1">
+    <tr>
+      <th>Nom</th>
+      <th>Adresse</th>
+      <th>PIN</th>
+    </tr>
+
+    {% for e in rows %}
+    <tr>
+      <td>{{ e.nom }}</td>
+      <td>{{ e.addr }}</td>
+      <td>{{ e.pin }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <br>
+  <a href="/new?token={{ token }}">Ajouter un étudiant</a>
+</body>
+</html>

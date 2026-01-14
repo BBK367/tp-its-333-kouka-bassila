@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Liste des étudiants</title>
+</head>
+<body>
+  <h1>Liste des étudiants</h1>
+
+  <table border="1" cellpadding="8">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>PIN</th>
+        <th>Adresse</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for e in etudiants %}
+      <tr>
+        <td>{{ e["id"] }}</td>
+        <td>{{ e["nom"] }}</td>
+        <td>{{ e["pin"] }}</td>
+        <td>{{ e["adresse"] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <p><a href="/">Retour au formulaire</a></p>
+</body>
+</html>
