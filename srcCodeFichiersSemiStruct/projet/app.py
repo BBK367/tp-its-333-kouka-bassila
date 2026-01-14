@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flasgger import Swagger
 import datetime, jwt
 
 app = Flask(__name__)
@@ -14,6 +15,9 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
+
+# Swagger UI
+Swagger(app)
 
 # =========================
 # MODELE
@@ -39,7 +43,7 @@ def check_token(token):
         return False
 
 # =========================
-# ROUTES
+# ROUTES HTML
 # =========================
 
 @app.route("/")
@@ -101,9 +105,28 @@ def list_students():
 
 
 # =========================
+# ROUTE API JSON + SWAGGER
+# =========================
+
+@app.route("/api/etudiants")
+def api_etudiants():
+    """
+    Liste des étudiants
+    ---
+    responses:
+      200:
+        description: Liste de tous les étudiants
+    """
+    rows = Etudiant.query.all()
+    return jsonify([
+        {"id": e.id, "nom": e.nom, "addr": e.addr, "pin": e.pin}
+        for e in rows
+    ])
+
+
+# =========================
 
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
     app.run(debug=True)
-
